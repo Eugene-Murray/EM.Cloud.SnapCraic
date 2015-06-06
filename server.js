@@ -27,15 +27,11 @@ bookRouter = require('./Routes/bookRoutes')(Book);
 
 
 app.use('/api/books', bookRouter); 
+app.use(express.static(__dirname + '/app'));
 
-
-/*app.get('/', function(req, res){
-    res.send('index.html');
-});*/
-
-app.get('/', function(req, res){
-    res.sendfile('index.html' );
-});
+//app.get('/', function(req, res){
+//    res.sendfile('index.html' );
+//});
 
 app.listen(port, function(){
     console.log('Gulp is running my app on  PORT: ' + port);
