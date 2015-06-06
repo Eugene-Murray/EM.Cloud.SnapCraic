@@ -1,6 +1,40 @@
-var http = require('http')
-var port = process.env.PORT || 1337;
-http.createServer(function(req, res) {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello World\n');
-}).listen(port);
+var express = require('express'),
+    mongoose = require('mongoose'),
+    bodyParser = require('body-parser');
+
+
+var db;
+console.log('Hello');
+if(process.env.ENV == 'Test'){
+
+    db = mongoose.connect('mongodb://localhost/bookAPI_test');
+}
+
+else{
+    db= mongoose.connect('mongodb://MongoLab-j:LXjht..8LGeoqAEbVMzcZCAKNru2nXbxHLuZH7GjvSM-@ds035747.mongolab.com:35747/MongoLab-j');
+}
+
+var Book = require('./models/bookModel');
+
+var app = express();
+
+var port = process.env.PORT || 3000;
+
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+
+bookRouter = require('./Routes/bookRoutes')(Book);
+
+
+app.use('/api/books', bookRouter); 
+
+
+app.get('/', function(req, res){
+    res.send('welcome to my API!');
+});
+
+app.listen(port, function(){
+    console.log('Gulp is running my app on  PORT: ' + port);
+});
+
+module.exports = app;
