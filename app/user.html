@@ -1,16 +1,20 @@
-<div>
-    <h2>{{user.name}}</h2>
-    {{ error }}
-    <img ng-src="http://www.gravatar.com/avatar/{{user.gravatar_id}}" title="{{user.name}}">Order:
-    <select ng-model="repoSortOrder">
-        <option value="+name">Name</option>
-        <option value="-stargazers_count">Stars</option>
-        <option value="+language">Language</option>
-    </select>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{user.name}}  {{ error }}</h3>
+    </div>
+    <div class="panel-body">
+        <img ng-src="http://www.gravatar.com/avatar/{{user.gravatar_id}}" title="{{user.name}}">Order:
+        <select ng-model="repoSortOrder">
+            <option value="+name">Name</option>
+            <option value="-stargazers_count">Stars</option>
+            <option value="+language">Language</option>
+        </select>
+    </div>
 </div>
 
 
-<table>
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Name</th>
